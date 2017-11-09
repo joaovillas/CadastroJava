@@ -21,7 +21,7 @@ public class TelaCadastrar extends javax.swing.JFrame {
 
     SQLiteJDBCDriverConnection bd = new SQLiteJDBCDriverConnection();
     Connection conn = bd.connect();
-            
+
     public TelaCadastrar() {
         initComponents();
     }
@@ -234,22 +234,20 @@ public class TelaCadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldTelefoneActionPerformed
 
     private void jButtonProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProcurarActionPerformed
-      String cep = jTextFieldCEP.getText();
-            CEPGraber resposta = new CEPGraber();
-            JSONObject jsonObject;
-            try {
+        String cep = jTextFieldCEP.getText();
+        CEPGraber resposta = new CEPGraber();
+        JSONObject jsonObject;
+        try {
             jsonObject = resposta.pegaCep(cep);
-           
-           String rua_json = (String) jsonObject.get("logradouro");
-           String bairro_json = (String) jsonObject.get("bairro");
-           String cidade_json = (String) jsonObject.get("localidade");
-           
-          
-           jTextFieldCidade.setText(cidade_json);
-           jTextFieldBairro.setText(bairro_json);
-           jTextFieldRua.setText(rua_json);
-           
-           
+
+            String rua_json = (String) jsonObject.get("logradouro");
+            String bairro_json = (String) jsonObject.get("bairro");
+            String cidade_json = (String) jsonObject.get("localidade");
+
+            jTextFieldCidade.setText(cidade_json);
+            jTextFieldBairro.setText(bairro_json);
+            jTextFieldRua.setText(rua_json);
+
             jTextFieldRua.setEnabled(true);
             jTextFieldCidade.setEnabled(true);
             jTextFieldNome.setEnabled(true);
@@ -258,68 +256,54 @@ public class TelaCadastrar extends javax.swing.JFrame {
             jTextFieldComplemento.setEnabled(true);
             jTextFieldBairro.setEnabled(true);
             jButton1.setEnabled(true);
-           
+
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "CEP INVÁLIDO");
-                   
+
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "CEP INVÁLIDO");
         }
-        
-            
+
+
     }//GEN-LAST:event_jButtonProcurarActionPerformed
 
-    private void limparCampos(){
-            jTextFieldRua.setText("");
-            jTextFieldCidade.setText("");
-            jTextFieldNome.setText("");
-            jTextFieldNumero.setText("");
-            jTextFieldCidade.setText("");
-            jTextFieldComplemento.setText("");
-            jTextFieldBairro.setText("");
-            jTextFieldTelefone.setText("");
-            jTextFieldCEP.setText("");
+    private void limparCampos() {
+        jTextFieldRua.setText("");
+        jTextFieldCidade.setText("");
+        jTextFieldNome.setText("");
+        jTextFieldNumero.setText("");
+        jTextFieldCidade.setText("");
+        jTextFieldComplemento.setText("");
+        jTextFieldBairro.setText("");
+        jTextFieldTelefone.setText("");
+        jTextFieldCEP.setText("");
     }
-    
-    
-    
-    
-    
-    
+
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-       
-        
-        
-        
+
         String cidade = jTextFieldCidade.getText().toUpperCase();
-        String bairro =jTextFieldBairro.getText().toUpperCase();
+        String bairro = jTextFieldBairro.getText().toUpperCase();
         String numero = jTextFieldNumero.getText().toUpperCase();
         String rua = jTextFieldCidade.getText().toUpperCase();
         String comple = jTextFieldComplemento.getText().toUpperCase();
         String cep = jTextFieldCEP.getText().toUpperCase();
         String nome = jTextFieldNome.getText().toUpperCase();
         String tel = jTextFieldTelefone.getText().toUpperCase();
-        
-        if (bairro !="" && cidade !="" && numero!="" && rua!="" && comple!="" && cep!= "" && nome !="" && tel !=""){
-        
-        SQLiteJDBCDriverConnection.create(conn);
-        SQLiteJDBCDriverConnection.insert(conn , nome,  tel,  cep,  rua,  bairro,  cidade ,  comple);
-        JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-        limparCampos();
-        }else{
-        JOptionPane.showMessageDialog(null, "Existe um ou mais campos vazios");  
+
+        if (!bairro.equals("") && !cidade.equals("") && !numero.equals("") && !rua.equals("") && !cep.equals("") && !nome.equals("") && !tel.equals("")) {
+
+            SQLiteJDBCDriverConnection.create(conn);
+            SQLiteJDBCDriverConnection.insert(conn, nome, tel, cep, rua, bairro, numero, cidade, comple);
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+            limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Existe um ou mais campos vazios");
         }
-        
-        
-        
-        
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
-                                              
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

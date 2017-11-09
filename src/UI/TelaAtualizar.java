@@ -276,7 +276,7 @@ public class TelaAtualizar extends javax.swing.JFrame {
         
            
          if(!bairro.equals("") && !rua.equals("") && !cidade.equals("") && !numero.equals("") && !telefone.equals("") && !cep.equals("") && !complemento.equals("") && !nome.equals("")){
-         SQLiteJDBCDriverConnection.update(conn, bairro, telefone, rua, cep, complemento, cidade, nome);
+         SQLiteJDBCDriverConnection.update(conn, bairro,numero, telefone, rua, cep, complemento, cidade, nome);
          JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!");
          limparCampos();         
          }else{

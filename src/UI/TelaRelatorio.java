@@ -20,7 +20,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
     SQLiteJDBCDriverConnection db = new SQLiteJDBCDriverConnection();
     Connection conn = db.connect();
-    
+
     public TelaRelatorio() {
         initComponents();
     }
@@ -53,11 +53,11 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Telefone", "CEP", "Rua", "Bairro", "Cidade", "Complemento"
+                "Nome", "Telefone", "CEP", "Rua", "Bairro", "Número", "Cidade", "Complemento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -86,92 +86,68 @@ public class TelaRelatorio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    public void mostraTabela(){
-         int x = jTable1.getRowCount();
-        int y=0;
-        while (y<x)
-        {
+    public void mostraTabela() {
+        int x = jTable1.getRowCount();
+        int y = 0;
+        while (y < x) {
             jTable1.selectAll();
-        ((DefaultTableModel) jTable1.getModel()).removeRow(jTable1.getSelectedRow());
-        y++;
+            ((DefaultTableModel) jTable1.getModel()).removeRow(jTable1.getSelectedRow());
+            y++;
         }
-      preencheTable(conn);
+        preencheTable(conn);
     }
-    
-    
-    
-    
-    
-    
-    
+
+
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+
         mostraTabela();
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         limpaTabela();
     }//GEN-LAST:event_formWindowClosed
 
-   
-    public void preencheTable(Connection conn){
-    
+    public void preencheTable(Connection conn) {
+
         String sql = "select * from Cadastro;";
-        
+
         DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
-       
-        try{
-            
+
+        try {
+
             Statement comandoSql = conn.createStatement();
-            ResultSet rs  =comandoSql.executeQuery(sql);
-            
-                
-                              
-                       
-            while(rs.next()){
-                
+            ResultSet rs = comandoSql.executeQuery(sql);
+
+            while (rs.next()) {
+
                 String nome = rs.getString("nome");
                 String telefone = rs.getString("telefone");
-                String cep = rs.getString("cep"); 
+                String cep = rs.getString("cep");
                 String rua = rs.getString("rua");
                 String bairro = rs.getString("bairro");
+                String numero = rs.getString("numero");
                 String cidade = rs.getString("cidade");
                 String complemento = rs.getString("complemento");
-                val.addRow(new String[] {nome,telefone,cep,rua,bairro,cidade,complemento});
+                val.addRow(new String[]{nome, telefone, cep, rua, bairro, numero, cidade, complemento});
             }
-            
-            
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println(e);
         }
-        
-    }    
-    
-    public void limpaTabela(){
+
+    }
+
+    public void limpaTabela() {
         int x = jTable1.getRowCount();
-        int y=0;
-        while (y<x)
-        {
-           jTable1.selectAll();
-        ((DefaultTableModel) jTable1.getModel()).removeRow(jTable1.getSelectedRow());
-        y++;
+        int y = 0;
+        while (y < x) {
+            jTable1.selectAll();
+            ((DefaultTableModel) jTable1.getModel()).removeRow(jTable1.getSelectedRow());
+            y++;
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

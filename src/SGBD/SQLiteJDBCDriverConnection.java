@@ -42,6 +42,7 @@ public class SQLiteJDBCDriverConnection {
                 sql += "	cep varchar(255)not null,";
                 sql += "	rua varchar(255) not null,";
                 sql += "	bairro varchar(255)not null,";
+                sql += "	numero varchar(255)not null,";
                 sql += "	cidade varchar(50)not null,";
                 sql += "	complemento varchar(255)";
                 sql += ");";
@@ -57,8 +58,8 @@ public class SQLiteJDBCDriverConnection {
         }
     }
    
-       public static void insert (Connection conn, String nome, String tel, String cep, String rua, String bairro, String cidade , String comp) {
-        String sql = "INSERT INTO Cadastro (nome, telefone, cep, rua, bairro, cidade , complemento) VALUES(?,?,?,?,?,?,?)";
+       public static void insert (Connection conn, String nome, String tel, String cep, String rua, String bairro,String numero, String cidade , String comp) {
+        String sql = "INSERT INTO Cadastro (nome, telefone, cep, rua, bairro,numero, cidade , complemento) VALUES(?,?,?,?,?,?,?,?)";
  
         try {
                 PreparedStatement pstmt = conn.prepareStatement(sql); 
@@ -69,8 +70,9 @@ public class SQLiteJDBCDriverConnection {
                 pstmt.setString(3, cep);
                 pstmt.setString(4, rua);
                 pstmt.setString(5, bairro);
-                pstmt.setString(6, cidade);
-                pstmt.setString(7, comp);
+                pstmt.setString(6, numero);
+                pstmt.setString(7, cidade);
+                pstmt.setString(8, comp);
                 
                 pstmt.executeUpdate();
                 
@@ -79,20 +81,21 @@ public class SQLiteJDBCDriverConnection {
         }
     }
     
-    public static void update (Connection conn, String bairro, String telefone, String rua , String cep  , String complemento , String cidade , String nome){
+    public static void update (Connection conn, String bairro,String numero, String telefone, String rua , String cep  , String complemento , String cidade , String nome){
         
-        String sql = "UPDATE Cadastro SET bairro = ?,telefone=? ,rua = ? ,cep =?,complemento = ? ,cidade = ? WHERE nome = ?";
+        String sql = "UPDATE Cadastro SET bairro = ?,numero=?,telefone=? ,rua = ? ,cep =?,complemento = ? ,cidade = ? WHERE nome = ?";
         
         try{
                 PreparedStatement pstmt = conn.prepareStatement(sql); 
                 
                 pstmt.setString(1, bairro);
-                pstmt.setString(2, telefone);
-                pstmt.setString(3, rua);
-                pstmt.setString(4, cep);
-                pstmt.setString(5, complemento);
-                pstmt.setString(6, cidade);
-                pstmt.setString(7, nome);
+                pstmt.setString(2, numero);
+                pstmt.setString(3, telefone);
+                pstmt.setString(4, rua);
+                pstmt.setString(5, cep);
+                pstmt.setString(6, complemento);
+                pstmt.setString(7, cidade);
+                pstmt.setString(8, nome);
                 pstmt.executeUpdate();
         
         }catch(SQLException e){

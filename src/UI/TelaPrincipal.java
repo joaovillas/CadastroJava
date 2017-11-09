@@ -38,6 +38,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Clientes");
 
         jMenuCadastrar.setText("Cadastrar");
 
@@ -119,7 +120,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuRelatóriosActionPerformed
 
     private void jMenuItemDeletarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeletarClienteActionPerformed
-        //
+        new TelaDeletar().setVisible(true);
     }//GEN-LAST:event_jMenuItemDeletarClienteActionPerformed
 
     private void jMenuItemRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioActionPerformed
